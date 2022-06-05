@@ -55,7 +55,6 @@ public class JPushPlugin implements FlutterPlugin, MethodCallHandler {
         this.callbackMap = new HashMap<>();
         this.sequence = 0;
         this.getRidCache = new ArrayList<>();
-        instance = this;
     }
 
 
@@ -168,7 +167,8 @@ public class JPushPlugin implements FlutterPlugin, MethodCallHandler {
         String channel = (String) map.get("channel");
         JPushInterface.setChannel(context, channel);
 
-        JPushPlugin.instance.dartIsReady = true;
+        instance = this;
+        instance.dartIsReady = true;
 
         // try to clean getRid cache
         scheduleCache();
