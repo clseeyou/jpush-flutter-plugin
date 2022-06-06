@@ -318,9 +318,10 @@ static NSMutableArray<FlutterResult>* getRidResults;
 - (void)setBadge:(FlutterMethodCall*)call result:(FlutterResult)result {
     JPLog(@"setBadge:%@",call.arguments);
     NSInteger badge = [call.arguments[@"badge"] integerValue];
-    if (badge < 0) {
-        badge = 0;
-    }
+    // 删除负数限制，将badge置为-1 可达到清空badge但不清空通知栏信息的目的
+    //if (badge < 0) {
+    //    badge = 0;
+    //}
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: badge];
     [JPUSHService setBadge: badge];
 }
